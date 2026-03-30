@@ -4,9 +4,11 @@ This folder contains the HiBob-specific code and assets extracted from the main 
 
 ## Contents
 
-- `src/hibob_client.py`
+- `src/extract/hibob_client.py`
 - `src/hibob_test.py`
-- `src/azure_ingest_hibob.py`
+- `src/load/azure_ingest_hibob.py`
+- `src/load/azure_ingest_hibob_staging.py`
+- `src/load/azure_ingest_hibob_both.py`
 - `src/test_all_endpoints.py`
 - `Hibob_Ingestion.ipynb`
 - `hibob_api_reference.csv`
@@ -32,6 +34,8 @@ The ingestion flow now uploads both the raw and normalized HiBob snapshots. Make
 
 ```bash
 python src/hibob_test.py
-python src/azure_ingest_hibob.py
+python src/load/azure_ingest_hibob.py
+python src/load/azure_ingest_hibob_staging.py
+python src/load/azure_ingest_hibob_both.py
 python src/test_all_endpoints.py
 ```

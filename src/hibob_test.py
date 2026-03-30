@@ -1,6 +1,13 @@
-from hibob_client import HiBobClient
+from pathlib import Path
+import sys
 import os
 from dotenv import load_dotenv
+
+CURRENT_DIR = Path(__file__).resolve().parent
+if str(CURRENT_DIR) not in sys.path:
+    sys.path.insert(0, str(CURRENT_DIR))
+
+from extract import HiBobClient
 
 # Load environment variables from .env file
 load_dotenv()
@@ -22,4 +29,3 @@ df_employees = client.get_all_employees([
 print(df_employees.head())
 print(f"\nTotal employees: {df_employees.shape[0]}")
 print("="*80)
-

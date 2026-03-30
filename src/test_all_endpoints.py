@@ -1,3 +1,4 @@
+import os
 import requests
 import base64
 import pandas as pd
@@ -67,7 +68,7 @@ print("HIBOB API ENDPOINT DISCOVERY TEST")
 print("="*100)
 
 for endpoint_name, endpoint_config in endpoints.items():
-    print(f"\n📌 Testing: {endpoint_name}")
+    print(f"\nTesting: {endpoint_name}")
     print(f"   URL: {endpoint_config['url']}")
     
     for method in endpoint_config["methods"]:
@@ -78,7 +79,7 @@ for endpoint_name, endpoint_config in endpoints.items():
                 response = requests.post(endpoint_config["url"], headers=headers, json=endpoint_config.get("payload"), timeout=10)
             
             status_code = response.status_code
-            status_text = "✅" if status_code == 200 else "❌"
+            status_text = "SUCCESS" if status_code == 200 else "FAIL"
             
             # Try to parse response
             try:
@@ -102,22 +103,22 @@ for endpoint_name, endpoint_config in endpoints.items():
                 "Response Preview": response_preview
             }
             results.append(result)
-            
+
             print(f"   {method:4} → {status_text} {status_code} | {response_preview}")
             
         except Exception as e:
             result = {
                 "Endpoint": endpoint_name,
                 "Method": method,
-                "Status": f"❌ Error",
+                "Status": "FAIL Error",
                 "Response Preview": str(e)[:80]
             }
             results.append(result)
-            print(f"   {method:4} → ❌ Error: {str(e)[:60]}")
+            print(f"   {method:4} → ERROR: {str(e)[:60]}")
 
 # Summary
 print("\n" + "="*100)
-print("SUMMARY - WORKING ENDPOINTS (✅200)")
+print("SUMMARY - WORKING ENDPOINTS (200)")
 print("="*100)
 
 working = [r for r in results if "✅" in r["Status"]]
@@ -128,7 +129,7 @@ else:
     print("No working endpoints found")
 
 print("\n" + "="*100)
-print("SUMMARY - FAILED ENDPOINTS (❌)")
+print("SUMMARY - FAILED ENDPOINTS")
 print("="*100)
 
 failed = [r for r in results if "❌" in r["Status"]]
