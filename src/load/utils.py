@@ -40,9 +40,6 @@ def choose_container(env_var: str, default: str) -> str:
     value = os.getenv(env_var)
     if value:
         return value.strip()
-    fallback = os.getenv("AZURE_CONTAINER_NAME")
-    if fallback:
-        return fallback.strip()
     return default
 
 
