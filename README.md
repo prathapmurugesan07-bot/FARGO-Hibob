@@ -20,6 +20,14 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
+### Environment variables
+The ingestion flow now uploads both the raw and normalized HiBob snapshots. Make sure the following variables are defined in `.env` (matching `.env.example`):
+
+- `AZURE_STORAGE_ACCOUNT`
+- `AZURE_STORAGE_KEY`
+- `AZURE_RAW_CONTAINER_NAME` (where raw snapshots live; default `raw`)
+- `AZURE_HIBOB_CONTAINER_NAME` (where normalized snapshots go; default `hibob`)
+
 ## Run
 
 ```bash
