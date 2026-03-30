@@ -64,6 +64,10 @@ def build_blob_name(run_context: Dict[str, str], suffix: str) -> str:
     return f"{build_blob_prefix(run_context)}/{suffix}"
 
 
+def build_hibob_blob_name() -> str:
+    return "employees_transformed.csv"
+
+
 def normalize_column_name(column_name: object) -> str:
     normalized = str(column_name).replace(".", "_").replace("/", "_")
     normalized = re.sub(r"[^a-zA-Z0-9_]+", "_", normalized)
@@ -164,7 +168,7 @@ def run_azure_staging_ingestion(
     df = dataframe if dataframe is not None else fetch_employee_data(client)
     context = run_context or create_run_context()
     normalized = transform_for_hibob(df)
-    blob_name = build_blob_name(context, f"employees_transformed_{context['run_time']}.csv")
+    blob_name = build_hibob_blob_name()
     upload_dataframe(
         normalized,
         blob_service_client,
