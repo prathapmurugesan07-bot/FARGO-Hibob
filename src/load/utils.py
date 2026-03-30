@@ -141,7 +141,7 @@ def run_azure_raw_ingestion(
     blob_service_client: BlobServiceClient = resources["blob_service_client"]
     raw_container: str = resources["raw_container"]
 
-    df = dataframe or fetch_employee_data(client)
+    df = dataframe if dataframe is not None else fetch_employee_data(client)
     context = run_context or create_run_context()
     blob_name = build_blob_name(context, f"employees_data_{context['run_time']}.csv")
     upload_dataframe(
@@ -164,7 +164,7 @@ def run_azure_staging_ingestion(
     blob_service_client: BlobServiceClient = resources["blob_service_client"]
     hibob_container: str = resources["hibob_container"]
 
-    df = dataframe or fetch_employee_data(client)
+    df = dataframe if dataframe is not None else fetch_employee_data(client)
     context = run_context or create_run_context()
     normalized = transform_for_hibob(df)
     blob_name = build_blob_name(context, f"employees_transformed_{context['run_time']}.csv")
