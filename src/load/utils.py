@@ -65,7 +65,7 @@ def build_blob_name(run_context: Dict[str, str], suffix: str) -> str:
 
 
 def build_hibob_blob_name() -> str:
-    return "employees_transformed.csv"
+    return "employees.csv"
 
 
 def normalize_column_name(column_name: object) -> str:
